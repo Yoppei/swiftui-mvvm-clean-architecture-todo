@@ -52,21 +52,3 @@ final class ToDoViewModel: ObservableObject {
     }
 
 }
-
-extension ToDoViewModel {
-    
-    enum State {
-        case idle
-        case loading
-        case success
-        case failure
-    }
-    
-    enum Event {
-        case update
-        case error
-        case loaded
-        case toggleIsDone
-    }
-    
-}
