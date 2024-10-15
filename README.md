@@ -1,9 +1,11 @@
 # swiftui-mvvm-clean-architecture-todo
 
-## Architecture
-
 Clean Architecture をベースに実装しています。  
-Presentation 層は MVVM で実装しています。
+Presentation 層は MVVM を採用しています。
+
+https://github.com/user-attachments/assets/9479f6f3-3c54-46d8-8ca1-db5e022d50bd
+
+## アーキテクチャ
 
 ```mermaid
 classDiagram
