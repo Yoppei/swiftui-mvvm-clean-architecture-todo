@@ -76,6 +76,14 @@ final class ToDoDetailViewModel: ObservableObject {
         }
     }
     
+    func deleteTask() {
+        do {
+            try AppDependency.shared.taskUseCase.deleteTask(task)
+        } catch {
+            setError(error.localizedDescription)
+        }
+    }
+    
     func setError(_ errorMessage: String) {
         self.errorMessage = errorMessage
     }

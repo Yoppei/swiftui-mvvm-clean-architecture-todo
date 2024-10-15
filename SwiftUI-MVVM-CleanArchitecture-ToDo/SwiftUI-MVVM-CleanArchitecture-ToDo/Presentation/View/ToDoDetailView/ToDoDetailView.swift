@@ -9,6 +9,8 @@ import SwiftUI
 
 struct ToDoDetailView: View {
     
+    @EnvironmentObject var router: Router
+    
     @StateObject private var vm: ToDoDetailViewModel
     @FocusState private var focusedField: InputField?
     
@@ -112,6 +114,12 @@ struct ToDoDetailView: View {
                 
                 guard noteIsSubmitted else { return }
                 vm.setNote()
+            }
+            Section {
+                Button("削除", role: .destructive) {
+                    vm.deleteTask()
+                    router.navigateBack()
+                }
             }
             
         }
