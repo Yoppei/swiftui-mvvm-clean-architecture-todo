@@ -8,36 +8,54 @@ Presentation 層は MVVM で実装しています。
 ```mermaid
 classDiagram
 namespace Presentation {
-  class View
-  class ViewModel
+  class TaskView
+  class TaskRowView
+  class TaskDetailView
+  class TaskCreateView
+  class TaskViewModel
+  class TaskDetailViewModel
+  class TaskCreateViewModel
 }
 namespace UseCase {
-  class UseCaseProtocol
-  class UseCaseImpl
+  class TaskUseCaseProtocol
+  class TaskUseCase
 }
 namespace Domain {
-  class DomainObject
-  class DomainService
+  class TaskEntity
+  class TaskTitleValueObject
+  class TaskNoteValueObject
+  class TaskDueDateValueObject
 }
 namespace Infrastructure {
-  class RepositoryProtocol
-  class RepositoryImpl
+  class TaskRepositoryProtocol
+  class TaskRepository
   class CoreData
 }
 
-direction TB
-View ..> ViewModel
-ViewModel ..> UseCaseProtocol
-UseCaseProtocol <|-- UseCaseImpl
-UseCaseImpl ..> DomainObject
-UseCaseImpl ..> DomainService
-UseCaseImpl ..> RepositoryProtocol
-RepositoryProtocol <|-- RepositoryImpl
-RepositoryImpl ..> CoreData
+direction LR
+TaskView..>TaskViewModel
+TaskView..>TaskRowView
+TaskDetailView..>TaskDetailViewModel
+TaskCreateView..>TaskCreateViewModel
 
-<<Protocol>> UseCaseProtocol
-<<Protocol>> RepositoryProtocol
+TaskViewModel..>TaskUseCaseProtocol
+TaskDetailViewModel..>TaskUseCaseProtocol
+TaskCreateViewModel..>TaskUseCaseProtocol
+TaskUseCaseProtocol<|--TaskUseCase
 
+TaskEntity*--TaskTitleValueObject: title
+TaskEntity*--TaskNoteValueObject: note
+TaskEntity*--TaskDueDateValueObject: dueDate
+TaskUseCase..>TaskEntity
+
+
+TaskRepositoryProtocol<|--TaskRepository
+TaskRepository..>CoreData
+TaskUseCase..>TaskRepositoryProtocol
+
+
+<<Protocol>> TaskUseCaseProtocol
+<<Protocol>> TaskRepositoryProtocol
 ```
 
 ## ドメインモデル図
@@ -69,9 +87,9 @@ class TaskDueDateValueObject {
   + value: Date?
 }
 
-TaskEntity ..> TaskTitleValueObject
-TaskEntity ..> TaskNoteValueObject
-TaskEntity ..> TaskDueDateValueObject
+TaskEntity *-- TaskTitleValueObject: title
+TaskEntity *-- TaskNoteValueObject: note
+TaskEntity *-- TaskDueDateValueObject: dueDate
 
 note for TaskTitleValueObject "- 前後の空白を除き１文字以上20文字以内とする\n- 前後に空白がある場合は空白を削除"
 note for TaskNoteValueObject "前後の空白は削除"
