@@ -1,5 +1,7 @@
 # swiftui-mvvm-clean-architecture-todo
 
+解説記事: https://zenn.dev/z_ypi/articles/e81d31355cd900
+
 Clean Architecture をベースに実装しています。  
 Presentation 層は MVVM を採用しています。
 
